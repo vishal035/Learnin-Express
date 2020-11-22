@@ -1,8 +1,79 @@
+const yargs =  require('yargs');
 const chalk = require('chalk');
 const validator = require('validator');
 const getNotes = require('./notes');
+const { argv } = require('yargs');
 
-const msg = getNotes;
+//Yargs 
+yargs.version('2.0.45');
 
-console.log(chalk.blue(msg));
-console.log(validator.isEmail('test@test.test'));
+
+//Create Add Command
+
+yargs.command({
+    command: 'add',
+    describe: 'Add a new note',
+    builder: {
+        title: {
+            describe: "Add a Note",
+            demandOption: true,
+                type: 'String'
+        },
+        body: {
+            describe: "Note Body",
+            demandOption: true,
+                type: 'String'
+        }
+    },
+    handler: function (argv) {
+        console.log(chalk.greenBright("Title: " + argv.title ));
+        console.log(chalk.yellowBright("Body: " + argv.body ));
+        console.log(chalk.blueBright("Note Added" ));
+    }
+})
+
+//Remove Command
+
+yargs.command({
+    command: 'remove',
+    describe: "It's remove a note",
+    builder: {
+        title: 'Remove a note',
+        demandOption: true,
+        type: 'String'
+    },
+    handler: function (argv) {
+        console.log(chalk.redBright("Title: "+ argv.title));
+        console.log(chalk.redBright("Note has been removed..!"));
+    }
+})
+
+//List Command
+yargs.command({
+    command: 'list',
+    describe: "Listing All Notes",
+    builder: {
+        title: 'List all notes'
+    },handler: function () {
+        console.log(chalk.rgb(15, 100, 204).bold('Listing all Notes....'))
+    }
+})
+
+
+//Read Command
+
+yargs.command({
+    command: 'read',
+    describe: "Read a specific note",
+    builder: {
+        title: 'Read a note',
+        demandOption: true,
+        type: 'String'
+    },handler: function (argv) {
+        console.log(chalk.blueBright("Title: "+ argv.title));
+        console.log(chalk.blueBright("Here is your note"));
+    }
+})
+
+
+yargs.parse();
