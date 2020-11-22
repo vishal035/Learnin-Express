@@ -11,5 +11,8 @@
     "App"
   ],
   "author": "Vishal Kumar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.1.17"
+  }
 }
