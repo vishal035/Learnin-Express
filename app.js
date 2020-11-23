@@ -42,7 +42,7 @@ yargs.command({
     },
     handler: function (argv) {
         console.log(chalk.redBright("Title: "+ argv.title));
-        console.log(chalk.redBright("Note has been removed..!"));
+        notes.removeNote(argv.title);
     }
 })
 

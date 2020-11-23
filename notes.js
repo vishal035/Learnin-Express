@@ -19,11 +19,29 @@ const addNote = function (title, body) {
             body: body
         })
         saveNotes(notes)
-        console.log(chalk.blueBright("Note Added" ));
+        console.log(chalk.blueBright("Note Added"));
 
-    }else{
+    } else {
         console.log(chalk.redBright("Note of this title is already exsist..!"));
     }
+}
+
+
+const removeNote = function (title) {
+    const notes = loadNotes()
+
+    const leftOverNotes = notes.filter(function (note) {
+        return note.title !== title;
+    })
+    
+
+    if(leftOverNotes.length < notes.length){
+        console.log(chalk.greenBright.inverse("Note has been removed..!"));
+        saveNotes(leftOverNotes);
+    }else{
+        console.log(chalk.redBright.inverse("Found Some Error While Removing the notes..!"));
+    }
+
 }
 
 
@@ -44,5 +62,6 @@ const loadNotes = function () {
 
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 };
