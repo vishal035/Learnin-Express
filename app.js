@@ -17,12 +17,12 @@ yargs.command({
         title: {
             describe: "Add a Note",
             demandOption: true,
-                type: 'String'
+                type: 'string'
         },
         body: {
             describe: "Note Body",
             demandOption: true,
-                type: 'String'
+                type: 'string'
         }
     },
     handler: function (argv) {
@@ -40,7 +40,7 @@ yargs.command({
     builder: {
         title: 'Remove a note',
         demandOption: true,
-        type: 'String'
+        type: 'string'
     },
     handler: function (argv) {
         console.log(chalk.redBright("Title: "+ argv.title));
@@ -68,7 +68,7 @@ yargs.command({
     builder: {
         title: 'Read a note',
         demandOption: true,
-        type: 'String'
+        type: 'string'
     },handler: function (argv) {
         console.log(chalk.blueBright("Title: "+ argv.title));
         console.log(chalk.blueBright("Here is your note"));
