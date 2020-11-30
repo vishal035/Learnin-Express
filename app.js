@@ -1,8 +1,10 @@
-const yargs =  require('yargs');
+const yargs = require('yargs');
 const chalk = require('chalk');
 const validator = require('validator');
 const notes = require('./notes');
-const { argv } = require('yargs');
+const {
+    argv
+} = require('yargs');
 
 //Yargs 
 yargs.version('2.0.45');
@@ -17,12 +19,12 @@ yargs.command({
         title: {
             describe: "Add a Note",
             demandOption: true,
-                type: 'string'
+            type: 'string'
         },
         body: {
             describe: "Note Body",
             demandOption: true,
-                type: 'string'
+            type: 'string'
         }
     },
     handler(argv) {
@@ -36,12 +38,14 @@ yargs.command({
     command: 'remove',
     describe: "It's remove a note",
     builder: {
-        title: 'Remove a note',
-        demandOption: true,
-        type: 'string'
+        title: {
+            describe: 'Remove a note',
+            demandOption: true,
+            type: 'string'
+        }
     },
     handler(argv) {
-        console.log(chalk.redBright("Title: "+ argv.title));
+        console.log(chalk.redBright("Title: " + argv.title));
         notes.removeNote(argv.title);
     }
 })
@@ -50,10 +54,8 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: "Listing All Notes",
-    builder: {
-        title: 'List all notes'
-    },handler() {
-        console.log(chalk.rgb(15, 100, 204).bold('Listing all Notes....'))
+    handler() {
+        notes.listNotes();
     }
 })
 
@@ -64,12 +66,14 @@ yargs.command({
     command: 'read',
     describe: "Read a specific note",
     builder: {
-        title: 'Read a note',
-        demandOption: true,
-        type: 'string'
-    },handler(argv) {
-        console.log(chalk.blueBright("Title: "+ argv.title));
-        console.log(chalk.blueBright("Here is your note"));
+        title: {
+            describe: 'Read a note',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title);    
     }
 })
 

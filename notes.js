@@ -9,9 +9,9 @@ const getNotes = ()  => {
 const addNote = (title, body) => {
     const notes = loadNotes()
 
-    const duplicateNotes = notes.filter((note) => note.title === title )
+    const duplicateNote = notes.find((note) => note.title === title )
 
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
@@ -41,6 +41,37 @@ const removeNote = (title) => {
 }
 
 
+const listNotes = () =>{
+    const notes = loadNotes()
+    notes.forEach((note) => {
+        console.log(chalk.blueBright.bold("----------------------------------------------------"));
+        console.log(chalk.blueBright.bold(`Title: ${note.title}`));
+        console.log(chalk.blueBright.bold("----------------------------------------------------"));
+        console.log(chalk.greenBright(`Body: ${note.body}`));
+        console.log(chalk.redBright.bold("----------------------------------------------------"));
+    })
+    console.log(chalk.yellowBright(`That's the last one..!`))
+}
+
+const readNote = (title) => {
+    const notes = loadNotes();
+
+    const findOne = notes.find((note) => note.title === title)
+
+    if(findOne){
+        console.log(chalk.blueBright.bold("----------------------------------------------------"));
+        console.log(chalk.blueBright.bold(`Title: ${findOne.title}`));
+        console.log(chalk.blueBright.bold("----------------------------------------------------"));
+        console.log(chalk.greenBright(`Body: ${findOne.body}`));
+        console.log(chalk.redBright.bold("----------------------------------------------------"));
+    }else{
+        console.log(chalk.redBright.bold("----------------------------------------------------"));
+        console.log(chalk.redBright.bold("Note not found..!"));
+        console.log(chalk.redBright.bold("----------------------------------------------------"));
+    }
+
+}
+
 const saveNotes = (notes) =>{
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
@@ -59,5 +90,7 @@ const loadNotes = () => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes,
+    readNote: readNote
 };
